@@ -2,18 +2,8 @@
 
 import { RomanticEvent } from "@/lib/events";
 import { cn } from "@/lib/utils";
-import { Heart, Loader2 } from "lucide-react";
+import { Heart } from "lucide-react";
 import { CSSProperties, ComponentProps, useEffect, useMemo, useState } from "react";
-import { getAIMessage } from "@/app/actions";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -56,9 +46,6 @@ export default function CountdownCard({
 }) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({});
   const [isFinished, setIsFinished] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [aiMessage, setAiMessage] = useState<string | null>(null);
-  const [showDialog, setShowDialog] = useState(false);
   
   const EventIcon = ICONS[event.tag];
 
@@ -88,20 +75,6 @@ export default function CountdownCard({
 
     return () => clearInterval(timer);
   }, [targetDate]);
-
-  useEffect(() => {
-    if (isFinished && !aiMessage) {
-      const fetchMessage = async () => {
-        setIsLoading(true);
-        setShowDialog(true);
-        const datePart = event.date.split("T")[0];
-        const result = await getAIMessage({ eventTag: event.tag, date: datePart });
-        setAiMessage(result.message || result.error || "Happy Special Day!");
-        setIsLoading(false);
-      };
-      fetchMessage();
-    }
-  }, [isFinished, event.tag, event.date, aiMessage]);
 
   return (
     <>
@@ -136,33 +109,6 @@ export default function CountdownCard({
           <Badge variant="outline" className="border-accent text-accent-foreground">{event.tag}</Badge>
         </CardFooter>
       </Card>
-
-      <AlertDialog open={showDialog} onOpenChange={setShowDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle className="font-headline flex items-center gap-2">
-              <Heart className="w-5 h-5 text-primary" /> A Message From The Heart
-            </AlertDialogTitle>
-            <AlertDialogDescription asChild>
-              <div className="min-h-[6rem] flex items-center justify-center pt-4 text-base">
-                {isLoading ? (
-                  <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                    <span>Crafting the perfect words...</span>
-                  </div>
-                ) : (
-                  <p className="text-foreground text-center">{aiMessage}</p>
-                )}
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction onClick={() => setShowDialog(false)} disabled={isLoading}>
-              Close
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }
