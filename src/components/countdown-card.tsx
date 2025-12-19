@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { format } from 'date-fns';
 
 interface TimeLeft {
   days?: number;
@@ -77,38 +78,39 @@ export default function CountdownCard({
   }, [targetDate]);
 
   return (
-    <>
-      <Card
-        className="w-full max-w-md animate-in fade-in-0 zoom-in-95 duration-500 fill-mode-backwards"
-        style={style}
-      >
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <EventIcon className="h-8 w-8 text-primary" />
-            <CardTitle className="font-headline text-2xl">{event.name}</CardTitle>
+    <Card
+      className="w-full max-w-md animate-in fade-in-0 zoom-in-95 duration-500 fill-mode-backwards"
+      style={style}
+    >
+      <CardHeader>
+        <div className="flex items-center gap-3">
+          <EventIcon className="h-8 w-8 text-primary" />
+          <CardTitle className="font-headline text-2xl">{event.name}</CardTitle>
+        </div>
+      </CardHeader>
+      <CardContent>
+        {isFinished ? (
+          <div className="text-center py-8">
+            <h2 className="text-3xl font-bold font-headline text-primary">
+              The day is here!
+            </h2>
+            <p className="text-muted-foreground mt-2">Happy {event.tag}!</p>
           </div>
-        </CardHeader>
-        <CardContent>
-          {isFinished ? (
-            <div className="text-center py-8">
-              <h2 className="text-3xl font-bold font-headline text-primary">
-                The day is here!
-              </h2>
-              <p className="text-muted-foreground mt-2">Happy {event.tag}!</p>
-            </div>
-          ) : (
-            <div className="flex justify-around gap-2 text-center">
-              <TimeUnit value={timeLeft.days} label="Days" />
-              <TimeUnit value={timeLeft.hours} label="Hours" />
-              <TimeUnit value={timeLeft.minutes} label="Minutes" />
-              <TimeUnit value={timeLeft.seconds} label="Seconds" />
-            </div>
-          )}
-        </CardContent>
-        <CardFooter>
-          <Badge variant="outline" className="border-accent text-accent-foreground">{event.tag}</Badge>
-        </CardFooter>
-      </Card>
-    </>
+        ) : (
+          <div className="flex justify-around gap-2 text-center">
+            <TimeUnit value={timeLeft.days} label="Days" />
+            <TimeUnit value={timeLeft.hours} label="Hours" />
+            <TimeUnit value={timeLeft.minutes} label="Minutes" />
+            <TimeUnit value={timeLeft.seconds} label="Seconds" />
+          </div>
+        )}
+      </CardContent>
+      <CardFooter className="justify-between">
+        <Badge variant="outline" className="border-accent text-accent-foreground">{event.tag}</Badge>
+        <p className="text-sm text-muted-foreground">
+          {format(targetDate, "PPP")}
+        </p>
+      </CardFooter>
+    </Card>
   );
 }
