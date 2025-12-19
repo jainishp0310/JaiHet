@@ -6,23 +6,33 @@ export type RomanticEvent = {
 };
 
 // Use future dates for demonstration of the countdown feature.
+const getFutureDate = (month: number, day: number) => {
+  const today = new Date();
+  const year = today.getFullYear();
+  const eventDate = new Date(year, month - 1, day);
+  if (eventDate < today) {
+    return new Date(year + 1, month - 1, day).toISOString();
+  }
+  return eventDate.toISOString();
+}
+
 export const events: RomanticEvent[] = [
   {
     id: 'anniversary',
     name: 'Our Anniversary',
-    date: '2022-05-02T00:00:00', // May 2nd, 2022
+    date: getFutureDate(5, 2), // May 2nd
     tag: 'Anniversary',
   },
   {
     id: 'birthday',
     name: "Her Birthday",
-    date: '2010-03-10T00:00:00', // March 10th, 2010
+    date: getFutureDate(3, 10), // March 10th
     tag: 'Birthday',
   },
   {
     id: 'special-date',
     name: 'Our Special Day',
-    date: '2022-05-22T00:00:00', // May 22nd, 2022
+    date: getFutureDate(5, 22), // May 22nd
     tag: 'Special Date',
   },
 ];
