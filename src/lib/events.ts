@@ -26,7 +26,7 @@ export const events: RomanticEvent[] = [
   {
     id: 'birthday',
     name: "Her Birthday",
-    date: getFutureDate(3, 10), // March 10th
+    date: getFutureDate(10, 10), // October 10th
     tag: 'Birthday',
   },
   {
