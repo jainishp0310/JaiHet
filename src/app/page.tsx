@@ -9,7 +9,7 @@ export default function Home() {
           Heartbeat Countdown
         </h1>
         <p className="text-muted-foreground mt-4 text-lg max-w-md mx-auto">
-          Every moment with you is a beat in my heart's favorite song.
+          You are my sun, my moon, and all my stars.
         </p>
       </div>
       <div className="flex flex-wrap justify-center gap-8">
