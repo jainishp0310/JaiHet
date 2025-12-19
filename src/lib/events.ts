@@ -20,7 +20,7 @@ export const events: RomanticEvent[] = [
   {
     id: 'anniversary',
     name: 'Our Anniversary',
-    date: '2022-05-03T00:00:00', // May 3rd
+    date: getFutureDate(5, 3), // May 3rd
     tag: 'Anniversary',
   },
   {
@@ -32,7 +32,7 @@ export const events: RomanticEvent[] = [
   {
     id: 'special-date',
     name: 'Our Special Day',
-    date: '2022-05-27T00:00:00', // May 27th
+    date: getFutureDate(5, 27), // May 27th
     tag: 'Special Date',
   },
 ];
