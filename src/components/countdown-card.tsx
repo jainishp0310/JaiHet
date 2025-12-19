@@ -143,15 +143,17 @@ export default function CountdownCard({
             <AlertDialogTitle className="font-headline flex items-center gap-2">
               <Heart className="w-5 h-5 text-primary" /> A Message From The Heart
             </AlertDialogTitle>
-            <AlertDialogDescription className="min-h-[6rem] flex items-center justify-center pt-4 text-base">
-              {isLoading ? (
-                <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                  <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                  <span>Crafting the perfect words...</span>
-                </div>
-              ) : (
-                <p className="text-foreground text-center">{aiMessage}</p>
-              )}
+            <AlertDialogDescription asChild>
+              <div className="min-h-[6rem] flex items-center justify-center pt-4 text-base">
+                {isLoading ? (
+                  <div className="flex flex-col items-center gap-2 text-muted-foreground">
+                    <Loader2 className="w-8 h-8 animate-spin text-primary" />
+                    <span>Crafting the perfect words...</span>
+                  </div>
+                ) : (
+                  <p className="text-foreground text-center">{aiMessage}</p>
+                )}
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
