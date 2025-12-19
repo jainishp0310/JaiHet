@@ -10,19 +10,19 @@ export const events: RomanticEvent[] = [
   {
     id: 'anniversary',
     name: 'Our Anniversary',
-    date: new Date(new Date().getFullYear() + 1, 1, 5).toISOString(), // Feb 5
+    date: '2022-05-02T00:00:00', // May 2nd, 2022
     tag: 'Anniversary',
   },
   {
     id: 'birthday',
     name: "Her Birthday",
-    date: new Date(new Date().getFullYear() + 1, 2, 10).toISOString(), // Mar 10
+    date: '2010-03-10T00:00:00', // March 10th, 2010
     tag: 'Birthday',
   },
   {
     id: 'special-date',
     name: 'Our Special Day',
-    date: new Date(new Date().getFullYear() + 1, 4, 22).toISOString(), // May 22
+    date: '2022-05-22T00:00:00', // May 22nd, 2022
     tag: 'Special Date',
   },
 ];
