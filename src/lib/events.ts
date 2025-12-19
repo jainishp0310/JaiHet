@@ -32,7 +32,7 @@ export const events: RomanticEvent[] = [
   {
     id: 'special-date',
     name: 'Our Special Day',
-    date: getFutureDate(5, 22), // May 22nd
+    date: '2022-05-27T00:00:00', // May 27th
     tag: 'Special Date',
   },
 ];
